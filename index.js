@@ -4,20 +4,25 @@ const characters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"
 const genPasswordsBtn = document.getElementById("gen-passwords-btn")
 const passwordEl1 = document.getElementById("password-el-1")
 const passwordEl2 = document.getElementById("password-el-2")
+const lengthInput = document.getElementById("length-input")
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length)
 }
 
-function generatePassword(length = 15) {
+function generatePassword(length) {
     let password = ""
-    for (i = 0; i <= length; i++) {
+    for (i = 0; i < length; i++) {
         password += characters[getRandomIndex(characters)]
     }
     return password
 }
 
 genPasswordsBtn.addEventListener("click", function () {
-    passwordEl1.textContent = generatePassword()
-    passwordEl2.textContent = generatePassword()
+    let passwordLength = 15
+    if (lengthInput.value) {
+        passwordLength = lengthInput.value
+    }
+    passwordEl1.textContent = generatePassword(passwordLength)
+    passwordEl2.textContent = generatePassword(passwordLength)
 })
